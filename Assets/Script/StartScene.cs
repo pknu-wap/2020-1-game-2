@@ -12,6 +12,8 @@ namespace Scripts.Manager
         public void StartGame()
         {
             SceneManager.LoadScene(PlaySceneName);
+            Time.timeScale = 1f;
+            PauseMenu.isPause = false;
         }
 
         public void QuitGame()

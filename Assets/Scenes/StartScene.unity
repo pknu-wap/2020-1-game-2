@@ -228,7 +228,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e9cd4359e64bd243b25439f11055ada, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlaySceneName: SampleScene
+  PlaySceneName: SampleScene.gocoke
 --- !u!4 &171134161
 Transform:
   m_ObjectHideFlags: 0

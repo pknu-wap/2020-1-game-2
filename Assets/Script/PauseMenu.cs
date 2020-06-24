@@ -27,22 +27,30 @@ namespace Scripts.Manager
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 if (!isPause)
+                {
+                    Cursor.lockState = CursorLockMode.Confined;
                     CallMenu();
+                }
                 else
+                {
+                    Cursor.lockState = CursorLockMode.Locked;
                     CloseMenu();
+                }
             }
         }
 
-        private void CallMenu()
+        public void CallMenu()
         {
             isPause = true;
             PauseMenuCanvas.SetActive(true);
+            Time.timeScale = 0f;
         }
 
-        private void CloseMenu()
+        public void CloseMenu()
         {
             isPause = false;
             PauseMenuCanvas.SetActive(false);
+            Time.timeScale = 1f;
         }
     }
 }
