@@ -13,7 +13,7 @@ public class StartPosition : MonoBehaviour
 
     void LocatePlayer()
     {
-        float columns = PlayerPrefs.GetFloat("columns");
+        int columns = PlayerPrefs.GetInt("columns");
         float size = PlayerPrefs.GetFloat("size");
         int xrand = (int)Random.Range(0, (columns * size) / 2);
         int zrand = (int)Random.Range(0, (columns * size) / 2);

@@ -19,17 +19,5 @@ namespace Scripts.Manager
             Application.Quit();
             Debug.Log("게임종료");
         }
-
-        void Start()
-        {
-
-        }
-
-
-        void Update()
-        {
-
-        }
     }
-
 }

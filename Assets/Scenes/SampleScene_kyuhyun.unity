@@ -559,10 +559,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0258ad70ee8e79a46a76a8aec3149462, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Wall: {fileID: 8672988784030855737, guid: e66f049e37dec48419c7e62efc548bcc, type: 3}
+  Wall: {fileID: 479666288834554440, guid: d85eefd602996a34ba171cb82e10d570, type: 3}
   Floor: {fileID: 8885633218874555593, guid: 574d9f41b0dbc004bb2f64d6af288fd0, type: 3}
   Rows: 20
   Columns: 20
+  QuizCount: 10
 --- !u!4 &1372967423
 Transform:
   m_ObjectHideFlags: 0
