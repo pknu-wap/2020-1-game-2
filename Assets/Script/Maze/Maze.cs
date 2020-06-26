@@ -12,7 +12,7 @@ public class Maze : MonoBehaviour
     private int currentColumn = 0;
     private bool Finish = false;
     private MazeRoom[,] room;
-
+    
     void Start()
     {
         CreateMaze();
@@ -30,6 +30,9 @@ public class Maze : MonoBehaviour
         room = new MazeRoom[Rows, Columns];
 
         float size = Wall.transform.localScale.x;
+        float move = (size - 3) / 2 + 1.25f;
+        PlayerPrefs.SetFloat("columns", Columns);
+        PlayerPrefs.SetFloat("size", size);        
 
         for (int i = 0; i < Rows; i++)
         {
@@ -38,16 +41,16 @@ public class Maze : MonoBehaviour
                 GameObject floor = Instantiate(Floor, new Vector3(i * size, 0f, j * size), Quaternion.identity);
                 floor.name = "Floor (" + i + "," + j + ")";
 
-                GameObject upWall = Instantiate(Wall, new Vector3(i * size - 2.25f, 1.75f, j * size), Quaternion.Euler(0, 90, 0));
+                GameObject upWall = Instantiate(Wall, new Vector3(i * size - move, 1.75f, j * size), Quaternion.Euler(0f, 90f, 0f));
                 upWall.name = "UpWall (" + i + "," + j + ")";
 
-                GameObject downWall = Instantiate(Wall, new Vector3(i * size + 2.25f, 1.75f, j * size), Quaternion.Euler(0, 90, 0));
+                GameObject downWall = Instantiate(Wall, new Vector3(i * size + move, 1.75f, j * size), Quaternion.Euler(0f, 90f, 0f));
                 downWall.name = "DownWall (" + i + "," + j + ")";
 
-                GameObject leftWall = Instantiate(Wall, new Vector3(i * size, 1.75f, j * size - 2.25f), Quaternion.identity);
+                GameObject leftWall = Instantiate(Wall, new Vector3(i * size, 1.75f, j * size - move), Quaternion.identity);
                 leftWall.name = "LeftWall (" + i + "," + j + ")";
 
-                GameObject rightWall = Instantiate(Wall, new Vector3(i * size, 1.75f, j * size + 2.25f), Quaternion.identity);
+                GameObject rightWall = Instantiate(Wall, new Vector3(i * size, 1.75f, j * size + move), Quaternion.identity);
                 rightWall.name = "RightWall (" + i + "," + j + ")";
 
                 room[i, j] = new MazeRoom();
@@ -77,7 +80,6 @@ public class Maze : MonoBehaviour
             // 위쪽 벽 부수기
             if (rand == 0)
             {
-                Debug.Log("Up");
                 if (UnVisited(currentRow - 1, currentColumn))
                 {
                     if (room[currentRow, currentColumn].UpWall)
@@ -95,7 +97,6 @@ public class Maze : MonoBehaviour
             // 아래쪽 벽 부수기
             else if (rand == 1)
             {
-                Debug.Log("Down");
                 if (UnVisited(currentRow + 1, currentColumn))
                 {
                     if (room[currentRow, currentColumn].DownWall)
@@ -113,7 +114,6 @@ public class Maze : MonoBehaviour
             // 왼쪽 벽 부수기
             else if (rand == 2)
             {
-                Debug.Log("Left");
                 if (UnVisited(currentRow, currentColumn - 1))
                 {
                     if (room[currentRow, currentColumn].LeftWall)
@@ -131,7 +131,6 @@ public class Maze : MonoBehaviour
             // 오른쪽 벽 부수기
             else if (rand == 3)
             {
-                Debug.Log("Right");
                 if (UnVisited(currentRow, currentColumn + 1))
                 {
                     if (room[currentRow, currentColumn].RightWall)
@@ -250,7 +249,6 @@ public class Maze : MonoBehaviour
             {
                 if (currentRow > 0 && room[currentRow - 1, currentColumn].Visited)
                 {
-                    Debug.Log("Destroyed down wall" + (currentRow - 1) + " " + currentColumn + "and up wall" + currentRow + " " + currentColumn);
                     if (room[currentRow, currentColumn].UpWall)
                     {
                         Destroy(room[currentRow, currentColumn].UpWall);
@@ -267,7 +265,6 @@ public class Maze : MonoBehaviour
             {
                 if (currentRow < Rows - 1 && room[currentRow + 1, currentColumn].Visited)
                 {
-                    Debug.Log("Destroyed up wall" + (currentRow + 1) + " " + currentColumn + "and down wall" + currentRow + " " + currentColumn);
                     if (room[currentRow, currentColumn].DownWall)
                     {
                         Destroy(room[currentRow, currentColumn].DownWall);
@@ -284,7 +281,6 @@ public class Maze : MonoBehaviour
             {
                 if (currentColumn > 0 && room[currentRow, currentColumn - 1].Visited)
                 {
-                    Debug.Log("Destroyed right wall" + currentRow + " " + (currentColumn - 1) + "and left wall" + currentRow + " " + currentColumn);
                     if (room[currentRow, currentColumn].LeftWall)
                     {
                         Destroy(room[currentRow, currentColumn].LeftWall);
@@ -301,7 +297,6 @@ public class Maze : MonoBehaviour
             {
                 if (currentColumn < Columns - 1 && room[currentRow, currentColumn + 1].Visited)
                 {
-                    Debug.Log("Destroyed left wall" + currentRow + " " + (currentColumn + 1) + "and right wall" + currentRow + " " + currentColumn);
                     if (room[currentRow, currentColumn].RightWall)
                     {
                         Destroy(room[currentRow, currentColumn].RightWall);

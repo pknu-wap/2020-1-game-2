@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 ﻿{"cameraMode":{"drawMode":0,"name":"Shaded","section":"Shading Mode"},"sceneLighting":true,"audioPlay":false,"sceneViewState":{"showFog":true,"showMaterialUpdate":false,"showSkybox":true,"showFlares":true,"showImageEffects":true,"showParticleSystems":true},"in2DMode":false,"pivot":{"x":-10.0,"y":1.0,"z":-3.010000228881836},"rotation":{"x":0.010909317061305046,"y":0.7497376799583435,"z":0.012377756647765637,"w":-0.6615613102912903},"size":10.0,"orthographic":true}
 =======
 ﻿{"cameraMode":{"drawMode":0,"name":"Shaded","section":"Shading Mode"},"sceneLighting":true,"audioPlay":false,"sceneViewState":{"showFog":true,"showMaterialUpdate":false,"showSkybox":true,"showFlares":true,"showImageEffects":true,"showParticleSystems":true},"in2DMode":false,"pivot":{"x":71.466796875,"y":6.125,"z":46.2811279296875},"rotation":{"x":-0.34154707193374636,"y":0.5969842672348023,"z":-0.31079405546188357,"w":-0.6560441255569458},"size":38.53813552856445,"orthographic":true}
 >>>>>>> e725c6e... 미로 생성 프로그램
+=======
+﻿{"cameraMode":{"drawMode":0,"name":"Shaded","section":"Shading Mode"},"sceneLighting":true,"audioPlay":false,"sceneViewState":{"showFog":true,"showMaterialUpdate":false,"showSkybox":true,"showFlares":true,"showImageEffects":true,"showParticleSystems":true},"in2DMode":false,"pivot":{"x":43.7734375,"y":38.5390625,"z":45.39955139160156},"rotation":{"x":-0.5326788425445557,"y":0.4655280113220215,"z":-0.5288687348365784,"w":-0.46889930963516238},"size":47.698246002197269,"orthographic":true}
+>>>>>>> kyuhyun
