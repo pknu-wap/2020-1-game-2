@@ -6,9 +6,9 @@ public class Maze : MonoBehaviour
 {
     public GameObject Wall;
     public GameObject Floor;
+    public GameObject End;
     public int Rows;
     public int Columns;
-    public int QuizCount;
     private int currentRow = 0;
     private int currentColumn = 0;
     private bool Finish = false;
@@ -17,14 +17,12 @@ public class Maze : MonoBehaviour
     void Start()
     {
         CreateMaze();
-
         while (!Finish)
         {
             DestroyWall();
             RepeatDestory();
         }
-
-        LocateQuiz();
+        LocateEndPosition();
     }
 
     // 미로의 전체적인 틀 제작
@@ -337,56 +335,6 @@ public class Maze : MonoBehaviour
             }
         }
     }
-
-    // 만들어진 미로의 랜덤한 벽에 퀴즈를 배치시키기
-    void LocateQuiz()
-    {
-        int i = 0; 
-
-        while (i < QuizCount)
-        {
-            int direction = Random.Range(0, 4);
-            int randomrow = Random.Range(0, Rows);
-            int randomcolumn = Random.Range(0, Columns);
-
-            // 랜덤의 위치를 받아서 해당 위치의 위쪽 벽에 퀴즈를 배치
-            if (direction == 0)
-            {
-                if (randomrow > 0 && room[randomrow, randomcolumn].UpWall)
-                {
-                    Debug.Log(randomrow + "," + randomcolumn + " select up");
-                    i++;
-                }
-            }         
-            // 랜덤의 위치를 받아서 해당 위치의 아래쪽 벽에 퀴즈를 배치
-            else if (direction == 1)
-            {
-                if (randomrow < Rows - 1 && room[randomrow, randomcolumn].DownWall)
-                {
-                    Debug.Log(randomrow + "," + randomcolumn + " select down");
-                    i++;
-                }
-            }
-            // 랜덤의 위치를 받아서 해당 위치의 왼쪽 벽에 퀴즈를 배치
-            else if (direction == 2)
-            {
-                if (randomcolumn > 0 && room[randomrow, randomcolumn].LeftWall)
-                {
-                    Debug.Log(randomrow + "," + randomcolumn + " select left");
-                    i++;
-                }
-            }
-            // 랜덤의 위치를 받아서 해당 위치의 오른쪽 벽에 퀴즈를 배치
-            else if (direction == 3)
-            {
-                if (randomcolumn < Columns - 1 && room[randomrow, randomcolumn].RightWall)
-                {
-                    Debug.Log(randomrow + "," + randomcolumn + " select right");
-                    i++;
-                }
-            }
-        }
-    }   
     void DestroyedUpWall(int row, int column)
     {
         room[row, column].UpWall = null;
@@ -402,5 +350,20 @@ public class Maze : MonoBehaviour
     void DestroyedRightWall(int row, int column)
     {
         room[row, column].RightWall = null;
+    }
+    void LocateEndPosition()
+    {
+        float EndSizeY = End.transform.localScale.y;
+        int columns = PlayerPrefs.GetInt("columns");
+        float size = PlayerPrefs.GetFloat("size");
+        int xrand = (int)Random.Range((columns * size) - ((columns * size) / 3), columns * size);
+        int zrand = (int)Random.Range((columns * size) - ((columns * size) / 3), columns * size);
+        int xquotient = (int)(xrand / size);
+        int zquotient = (int)(zrand / size);
+        float xlocation = xquotient * size;
+        float zlocation = zquotient * size;
+        GameObject end = Instantiate(End, new Vector3(xlocation, (EndSizeY / 2) + 0.25f, zlocation), Quaternion.identity);
+        end.name = "EndPositon";
+        end.transform.parent = transform;
     }
 }
