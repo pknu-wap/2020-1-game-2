@@ -1,9 +1,17 @@
 sceneSetups:
+- path: Assets/Scenes/StartScene.unity
+  isLoaded: 1
+  isActive: 0
+  isSubScene: 0
+- path: Assets/Scenes/SampleScene_kyuhyun.unity
+  isLoaded: 1
+  isActive: 0
+  isSubScene: 0
 - path: Assets/Scenes/SampleScene_luswiy.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
-- path: Assets/Scenes/SampleScene_kyuhyun.unity
+- path: Assets/Scenes/SampleScene_gocoke.unity
   isLoaded: 1
   isActive: 0
   isSubScene: 0

@@ -28,7 +28,7 @@ namespace Scripts.Manager
 
         void Update()
         {
-
+            Cursor.lockState = CursorLockMode.None;
         }
     }
 
