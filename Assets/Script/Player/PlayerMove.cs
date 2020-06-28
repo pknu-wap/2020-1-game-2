@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Threading;
+using Scripts.Manager;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
@@ -20,8 +21,11 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        MoveCtrl();
-        RotCtrl();
+        if(PauseMenu.isPause==false)
+        {
+            MoveCtrl();
+            RotCtrl();
+        }
     }
 
     void MoveCtrl()
