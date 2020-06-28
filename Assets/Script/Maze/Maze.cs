@@ -6,6 +6,7 @@ public class Maze : MonoBehaviour
 {
     public GameObject Wall;
     public GameObject Floor;
+    public GameObject End;
     public int Rows;
     public int Columns;
     private int currentRow = 0;
@@ -16,12 +17,12 @@ public class Maze : MonoBehaviour
     void Start()
     {
         CreateMaze();
-
         while (!Finish)
         {
             DestroyWall();
             RepeatDestory();
         }
+        LocateEndPosition();
     }
 
     // 미로의 전체적인 틀 제작
@@ -31,8 +32,9 @@ public class Maze : MonoBehaviour
 
         float size = Wall.transform.localScale.x;
         float move = (size - 3) / 2 + 1.25f;
-        PlayerPrefs.SetFloat("columns", Columns);
-        PlayerPrefs.SetFloat("size", size);        
+        PlayerPrefs.SetInt("rows", Rows);
+        PlayerPrefs.SetInt("columns", Columns);
+        PlayerPrefs.SetFloat("size", size);  
 
         for (int i = 0; i < Rows; i++)
         {
@@ -58,6 +60,8 @@ public class Maze : MonoBehaviour
                 room[i, j].DownWall = downWall;
                 room[i, j].LeftWall = leftWall;
                 room[i, j].RightWall = rightWall;
+
+                
 
                 floor.transform.parent = transform;
                 upWall.transform.parent = transform;
@@ -85,13 +89,17 @@ public class Maze : MonoBehaviour
                     if (room[currentRow, currentColumn].UpWall)
                     {
                         Destroy(room[currentRow, currentColumn].UpWall);
-                    }
+                        DestroyedUpWall(currentRow, currentColumn);
+                    }       
+                    
                     currentRow--;
                     room[currentRow, currentColumn].Visited = true;
+
                     if (room[currentRow, currentColumn].DownWall)
                     {
                         Destroy(room[currentRow, currentColumn].DownWall);
-                    }
+                        DestroyedDownWall(currentRow, currentColumn);
+                    }                   
                 }
             }
             // 아래쪽 벽 부수기
@@ -102,12 +110,16 @@ public class Maze : MonoBehaviour
                     if (room[currentRow, currentColumn].DownWall)
                     {
                         Destroy(room[currentRow, currentColumn].DownWall);
+                        DestroyedDownWall(currentRow, currentColumn);
                     }
+
                     currentRow++;
                     room[currentRow, currentColumn].Visited = true;
+
                     if (room[currentRow, currentColumn].UpWall)
                     {
                         Destroy(room[currentRow, currentColumn].UpWall);
+                        DestroyedUpWall(currentRow, currentColumn);
                     }
                 }
             }
@@ -119,12 +131,16 @@ public class Maze : MonoBehaviour
                     if (room[currentRow, currentColumn].LeftWall)
                     {
                         Destroy(room[currentRow, currentColumn].LeftWall);
+                        DestroyedLeftWall(currentRow, currentColumn);
                     }
+                    
                     currentColumn--;
                     room[currentRow, currentColumn].Visited = true;
+                    
                     if (room[currentRow, currentColumn].RightWall)
                     {
                         Destroy(room[currentRow, currentColumn].RightWall);
+                        DestroyedRightWall(currentRow, currentColumn);
                     }
                 }
             }
@@ -132,17 +148,15 @@ public class Maze : MonoBehaviour
             else if (rand == 3)
             {
                 if (UnVisited(currentRow, currentColumn + 1))
-                {
-                    if (room[currentRow, currentColumn].RightWall)
-                    {
-                        Destroy(room[currentRow, currentColumn].RightWall);
-                    }
+                {                   
+                    Destroy(room[currentRow, currentColumn].RightWall);
+                    DestroyedRightWall(currentRow, currentColumn);
+                    
                     currentColumn++;
                     room[currentRow, currentColumn].Visited = true;
-                    if (room[currentRow, currentColumn].LeftWall)
-                    {
-                        Destroy(room[currentRow, currentColumn].LeftWall);
-                    }
+                    
+                    Destroy(room[currentRow, currentColumn].LeftWall);
+                    DestroyedLeftWall(currentRow, currentColumn);                   
                 }
             }
         }
@@ -242,72 +256,114 @@ public class Maze : MonoBehaviour
 
         while (!destroy)
         {
-            int direction = Random.Range(0, 4);
+            int rand = Random.Range(0, 4);
 
             // 위쪽 벽 부수기
-            if (direction == 0)
+            if (rand == 0)
             {
                 if (currentRow > 0 && room[currentRow - 1, currentColumn].Visited)
                 {
                     if (room[currentRow, currentColumn].UpWall)
                     {
                         Destroy(room[currentRow, currentColumn].UpWall);
-                    }
+                        DestroyedUpWall(currentRow, currentColumn);
+                    }                  
                     if (room[currentRow - 1, currentColumn].DownWall)
                     {
                         Destroy(room[currentRow - 1, currentColumn].DownWall);
-                    }
+                        DestroyedDownWall(currentRow - 1, currentColumn);
+                    }                    
+                    
                     destroy = true;
                 }
             }
             // 아래쪽 벽 부수기
-            else if (direction == 1)
+            else if (rand == 1)
             {
                 if (currentRow < Rows - 1 && room[currentRow + 1, currentColumn].Visited)
                 {
                     if (room[currentRow, currentColumn].DownWall)
                     {
                         Destroy(room[currentRow, currentColumn].DownWall);
+                        DestroyedDownWall(currentRow, currentColumn);
                     }
                     if (room[currentRow + 1, currentColumn].UpWall)
                     {
                         Destroy(room[currentRow + 1, currentColumn].UpWall);
+                        DestroyedUpWall(currentRow + 1, currentColumn);
                     }
                     destroy = true;
                 }
             }
             // 왼쪽 벽 부수기
-            else if (direction == 2)
+            else if (rand == 2)
             {
                 if (currentColumn > 0 && room[currentRow, currentColumn - 1].Visited)
                 {
                     if (room[currentRow, currentColumn].LeftWall)
                     {
                         Destroy(room[currentRow, currentColumn].LeftWall);
+                        DestroyedLeftWall(currentRow, currentColumn);
                     }
                     if (room[currentRow, currentColumn - 1].RightWall)
                     {
                         Destroy(room[currentRow, currentColumn - 1].RightWall);
+                        DestroyedRightWall(currentRow, currentColumn - 1);
                     }
+
                     destroy = true;
                 }
             }
-            // 아래쪽 벽 부수기
-            else if (direction == 3)
+            // 오른쪽 벽 부수기
+            else if (rand == 3)
             {
                 if (currentColumn < Columns - 1 && room[currentRow, currentColumn + 1].Visited)
                 {
                     if (room[currentRow, currentColumn].RightWall)
                     {
                         Destroy(room[currentRow, currentColumn].RightWall);
+                        DestroyedRightWall(currentRow, currentColumn);
                     }
                     if (room[currentRow, currentColumn + 1].LeftWall)
                     {
                         Destroy(room[currentRow, currentColumn + 1].LeftWall);
+                        DestroyedLeftWall(currentRow, currentColumn + 1);
                     }
+
                     destroy = true;
                 }
             }
         }
+    }
+    void DestroyedUpWall(int row, int column)
+    {
+        room[row, column].UpWall = null;
+    }
+    void DestroyedDownWall(int row, int column)
+    {
+        room[row, column].DownWall = null;
+    }
+    void DestroyedLeftWall(int row, int column)
+    {
+        room[row, column].LeftWall = null;
+    }
+    void DestroyedRightWall(int row, int column)
+    {
+        room[row, column].RightWall = null;
+    }
+    void LocateEndPosition()
+    {
+        float EndSizeY = End.transform.localScale.y;
+        int columns = PlayerPrefs.GetInt("columns");
+        float size = PlayerPrefs.GetFloat("size");
+        int xrand = (int)Random.Range((columns * size) - ((columns * size) / 3), columns * size);
+        int zrand = (int)Random.Range((columns * size) - ((columns * size) / 3), columns * size);
+        int xquotient = (int)(xrand / size);
+        int zquotient = (int)(zrand / size);
+        float xlocation = xquotient * size;
+        float zlocation = zquotient * size;
+        GameObject end = Instantiate(End, new Vector3(xlocation, (EndSizeY / 2) + 0.25f, zlocation), Quaternion.identity);
+        end.name = "EndPositon";
+        end.transform.parent = transform;
     }
 }

@@ -33,5 +33,4 @@ namespace Scripts.Manager
             Cursor.lockState = CursorLockMode.None;
         }
     }
-
 }

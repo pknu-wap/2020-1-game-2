@@ -179,7 +179,8 @@ GameObject:
   - component: {fileID: 560510323}
   - component: {fileID: 560510325}
   - component: {fileID: 560510320}
-  m_Layer: 9
+  - component: {fileID: 560510323}
+  m_Layer: 0
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -201,6 +202,24 @@ MonoBehaviour:
   moveSpeed: 5
   rotSpeed: 3
   Cam: {fileID: 963194227}
+--- !u!143 &560510321
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 560510319}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 1.01, z: 0}
 --- !u!4 &560510322
 Transform:
   m_ObjectHideFlags: 0
@@ -519,6 +538,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Wall: {fileID: 479666288834554440, guid: d85eefd602996a34ba171cb82e10d570, type: 3}
   Floor: {fileID: 8885633218874555593, guid: 574d9f41b0dbc004bb2f64d6af288fd0, type: 3}
+  End: {fileID: 1834975447483574527, guid: 5dfd0b15f32afe1418f50ee7fcdbd637, type: 3}
   Rows: 20
   Columns: 20
 --- !u!4 &1372967423
