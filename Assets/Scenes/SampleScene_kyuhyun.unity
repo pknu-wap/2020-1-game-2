@@ -179,6 +179,7 @@ GameObject:
   - component: {fileID: 560510323}
   - component: {fileID: 560510325}
   - component: {fileID: 560510320}
+  - component: {fileID: 560510321}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -201,6 +202,18 @@ MonoBehaviour:
   moveSpeed: 5
   rotSpeed: 3
   Cam: {fileID: 963194227}
+--- !u!114 &560510321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 560510319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e90653f8839bbe047b0e135484ebe3fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &560510322
 Transform:
   m_ObjectHideFlags: 0

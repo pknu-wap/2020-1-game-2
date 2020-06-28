@@ -21,6 +21,6 @@ public class StartPosition : MonoBehaviour
         int zquotient = (int)(zrand / size);        
         float xlocation = xquotient * size;
         float zlocation = zquotient * size;
-        transform.position = new Vector3(xlocation, 3, zlocation);
+        transform.position = new Vector3(xlocation, 0.5f, zlocation);
     }
 }
